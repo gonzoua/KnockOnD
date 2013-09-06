@@ -16,18 +16,13 @@
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
-    
+    NSLog(@"Did Finish");
     // Override point for customization after app launch    
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 }
 
 
-- (void)dealloc {
-    [viewController release];
-    [window release];
-    [super dealloc];
-}
 
 
 @end

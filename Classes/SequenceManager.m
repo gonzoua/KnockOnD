@@ -12,23 +12,23 @@
 
 @implementation SequenceManager
 
-SYNTHESIZE_SINGLETON_FOR_CLASS(SequenceManager);
++ (SequenceManager*)sharedSequenceManager {
+    static dispatch_once_t pred;
+    static id shared = nil;
+    dispatch_once(&pred, ^{
+        shared = [[SequenceManager alloc] initUniqueInstance];
+    });
+    return shared;
+}
 
-- (id)init
-{
-    self = [super init];
+- (id) initUniqueInstance {
+    self = [self init];
     if (self) {
-        sequences = [[[NSMutableArray alloc] init] retain];
+        sequences = [[NSMutableArray alloc] init];
         [self load];
     }
     
     return self;
-}
-
-- (void) dealloc
-{
-    [sequences release];
-    [super dealloc];
 }
 
 - (void) load
@@ -36,12 +36,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SequenceManager);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (defaults) {
         NSData *data = [defaults objectForKey:@"Sequences"];
-        NSMutableArray *tmp = [[NSKeyedUnarchiver unarchiveObjectWithData:data] retain];   
-        if (tmp) {
-            [sequences release];
-            sequences = tmp;
+        if (data != nil) {
+            NSMutableArray *tmp = [NSKeyedUnarchiver unarchiveObjectWithData:data];   
+            if (tmp) {
+                sequences = tmp;
+            }
         }
-            
     }
 }
 

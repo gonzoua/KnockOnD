@@ -59,13 +59,10 @@
 }
 
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (IBAction) add: (id)sender 
 {
-    currentSeq = [[[Sequence alloc] init] retain];
+    currentSeq = [[Sequence alloc] init];
     addingNew = YES;
     
     [self editSequence];
@@ -73,7 +70,7 @@
 
 - (void)sequenceViewControllerDidFinish:(SequenceViewController *)controller accepted:(BOOL)accepted 
 {    
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
     if (accepted)
     {
@@ -90,7 +87,6 @@
         currentSeq.ports = ports;
         if (addingNew) {
             [[SequenceManager sharedSequenceManager] addSequence:currentSeq];
-            [currentSeq release];
         }
         [[SequenceManager sharedSequenceManager] save];
         [seqTableView reloadData];
@@ -137,12 +133,12 @@
     cell = [tableView dequeueReusableCellWithIdentifier:kSectionCellID];
 
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSectionCellID] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSectionCellID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.opaque = NO;
-        cell.textLabel.textAlignment = UITextAlignmentLeft;
+        cell.textLabel.textAlignment = NSTextAlignmentLeft;
         cell.textLabel.textColor = [UIColor grayColor];
         cell.textLabel.numberOfLines = 1;
         cell.textLabel.highlightedTextColor = [UIColor blackColor];
@@ -192,7 +188,7 @@
     }
     controller.ports = ports;
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentModalViewController:controller animated:YES];
+    [self presentViewController:controller animated:YES completion:nil];
 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

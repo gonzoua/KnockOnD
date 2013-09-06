@@ -13,13 +13,6 @@
 
 @synthesize textField;
 
-- (void) dealloc
-{
-    
-    [textField release];
-    
-    [super dealloc];
-}
 
 @end
 
@@ -28,14 +21,6 @@
 @synthesize portField;
 @synthesize protoSegment;
 
-- (void) dealloc
-{
-    
-    [portField release];
-    [protoSegment release];
-
-    [super dealloc];
-}
 
 @end
 
@@ -50,9 +35,9 @@
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        ports = [[NSMutableArray array] retain];
-        name = [[NSString stringWithString:@""] retain];
-        host = [[NSString stringWithString:@""] retain];
+        ports = [NSMutableArray array];
+        name = @"";
+        host = @"";
         delay = 55;
     }
     return self;
@@ -110,10 +95,6 @@
 }
 
 
-- (void)dealloc {
-    [ports release];
-    [super dealloc];
-}
 
 #pragma mark UITableViewDataSource
 
@@ -124,7 +105,7 @@
         // some extra initialization
     }
     
-    return [self retain];
+    return self;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -170,11 +151,11 @@
         cell = [tableView dequeueReusableCellWithIdentifier:kNameCellID];
         nameCell = (NameCell *)cell;
         if (cell == nil) {
-            nameCell = [[[NameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kNameCellID] autorelease];
+            nameCell = [[NameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kNameCellID];
             cell = nameCell;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.opaque = NO;
-            cell.textLabel.textAlignment = UITextAlignmentLeft;
+            cell.textLabel.textAlignment = NSTextAlignmentLeft;
             cell.textLabel.textColor = [UIColor grayColor];
             cell.textLabel.numberOfLines = 1;
             cell.textLabel.highlightedTextColor = [UIColor blackColor];
@@ -186,7 +167,7 @@
             textField.backgroundColor = [UIColor whiteColor];
             textField.autocorrectionType = UITextAutocorrectionTypeNo;        // no auto correction support
             textField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
-            textField.textAlignment = UITextAlignmentLeft;
+            textField.textAlignment = NSTextAlignmentLeft;
             if (indexPath.row == 0)
                 textField.keyboardType = UIKeyboardTypeASCIICapable; // use the default type input method (entire keyboard)
             else
@@ -206,12 +187,12 @@
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Name";
             nameCell.textField.placeholder = @"Enter name";
-            nameCell.textField.text = [name retain];
+            nameCell.textField.text = name;
         }
         else if (indexPath.row == 1) {
             nameCell.textField.placeholder = @"Enter hostname";
             cell.textLabel.text = @"Host";
-            nameCell.textField.text = [host retain];
+            nameCell.textField.text = host;
         }        
         else if (indexPath.row == 2) {
             nameCell.textField.placeholder = @"Enter delay";
@@ -226,11 +207,11 @@
     PortCell *portCell = (PortCell *)cell;
     if (cell == nil)
     {
-        portCell = [[[PortCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPortCellID] autorelease];
+        portCell = [[PortCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPortCellID];
         cell = portCell;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.opaque = NO;
-        cell.textLabel.textAlignment = UITextAlignmentLeft;
+        cell.textLabel.textAlignment = NSTextAlignmentLeft;
         cell.textLabel.textColor = [UIColor grayColor];
         cell.textLabel.numberOfLines = 1;
         cell.textLabel.highlightedTextColor = [UIColor blackColor];
@@ -255,7 +236,7 @@
         textField.backgroundColor = [UIColor whiteColor];
         textField.autocorrectionType = UITextAutocorrectionTypeNo;        // no auto correction support
         textField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
-        textField.textAlignment = UITextAlignmentLeft;
+        textField.textAlignment = NSTextAlignmentLeft;
         textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation; // use the default type input method (entire keyboard)
         textField.returnKeyType = UIReturnKeyDone;
         textField.delegate = self;
@@ -282,8 +263,9 @@
         portCell.portField.tag = indexPath.row;
         portCell.protoSegment.tag = indexPath.row;
         
-        if ([[[ports objectAtIndex:indexPath.row] port] intValue] != 0)
-            portCell.portField.text = [[[ports objectAtIndex:indexPath.row] port] stringValue];
+        Port *portObj = [ports objectAtIndex:indexPath.row];
+        if ([[portObj port] intValue] != 0)
+            portCell.portField.text = [[portObj port] stringValue];
         else
             portCell.portField.text = @"";
 
@@ -497,7 +479,6 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:msg
                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];   
-    [alert release];
 }
 
 @end

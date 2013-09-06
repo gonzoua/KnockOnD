@@ -78,7 +78,7 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
     currentSeq = 0;
     self.internetConnectionStatus = NotReachable;
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
-    Reachability  *curReach = [[Reachability reachabilityForInternetConnection] retain];
+    Reachability  *curReach = [Reachability reachabilityForInternetConnection];
     self.internetConnectionStatus = curReach.currentReachabilityStatus;
     [curReach startNotifer];
 
@@ -115,9 +115,6 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
 }
 
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark UIPickerViewDelegate
@@ -173,7 +170,10 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
 {
     NSInteger sequences = [[SequenceManager sharedSequenceManager] count];
     NSLog(@"%d sequences", sequences);
-    return sequences;    
+    if (sequences == 0)
+        return 1;
+    else
+        return sequences;    
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -194,12 +194,13 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
 
 - (IBAction)knock
 {
+    
+    currentSeq = [pickerView selectedRowInComponent:0];
 
     if (self.internetConnectionStatus == NotReachable) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Status" message:@"Sorry, network is not available. Please try again later." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         
         [alert show];
-        [alert release];
         return;
     }
     
@@ -208,7 +209,6 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Internal inconsistency, please report this message to the author" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         
         [alert show];
-        [alert release];
         return;                
     }
         
@@ -216,7 +216,6 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No ports defined for this sequence" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         
         [alert show];
-        [alert release];
         return;        
     }
 
@@ -241,47 +240,44 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Host not found" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alert show];
-    [alert release];
 }
 
 - (void)doKnock
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
     
-    NSLog(@"Knocking...");
-    
-    // we should not have received this message at all
-    if ([[SequenceManager sharedSequenceManager] count] == 0) {
-        [pool release];
-        [self performSelectorOnMainThread:@selector(hideAlert) withObject:self waitUntilDone:YES];
-        return;        
-    }
-    
-    Sequence *s = [[SequenceManager sharedSequenceManager] sequenceAtIndex:currentSeq];
-
-    if (s) {
+        NSLog(@"Knocking...");
         
-        NSInteger delay = [s.delay intValue];
-        struct hostent *he = gethostbyname([s.host UTF8String]);
-        
-        if (he == NULL)
-        {
-            [self performSelectorOnMainThread:@selector(hostNotFound) withObject:self waitUntilDone:YES];
-            [pool release];
-            return;
+        // we should not have received this message at all
+        if ([[SequenceManager sharedSequenceManager] count] == 0) {
+            [self performSelectorOnMainThread:@selector(hideAlert) withObject:self waitUntilDone:YES];
+            return;        
         }
         
-        for (Port *p in s.ports) {
-            NSLog(@"*knock* -> %@/%@", p.port, p.proto);
-            unsigned short port = [p.port intValue];
-            BOOL isUDP = [p.proto isEqualToString:@"UDP"];
-            knockOnePort(he, port, isUDP);
-            NSLog(@"Sleeping for %dms", delay);
-            usleep(delay*1000);
-        }
-    }
+        Sequence *s = [[SequenceManager sharedSequenceManager] sequenceAtIndex:currentSeq];
 
-    [pool release];
+        if (s) {
+            
+            NSInteger delay = [s.delay intValue];
+            struct hostent *he = gethostbyname([s.host UTF8String]);
+            
+            if (he == NULL)
+            {
+                [self performSelectorOnMainThread:@selector(hostNotFound) withObject:self waitUntilDone:YES];
+                return;
+            }
+            
+            for (Port *p in s.ports) {
+                NSLog(@"*knock* -> %@/%@", p.port, p.proto);
+                unsigned short port = [p.port intValue];
+                BOOL isUDP = [p.proto isEqualToString:@"UDP"];
+                knockOnePort(he, port, isUDP);
+                NSLog(@"Sleeping for %dms", delay);
+                usleep(delay*1000);
+            }
+        }
+
+    }
     [self performSelectorOnMainThread:@selector(hideAlert) withObject:self waitUntilDone:YES];
 }
 
@@ -292,16 +288,15 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
     controller.delegate = self;
     
     controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentModalViewController:controller animated:YES];
+    [self presentViewController:controller animated:YES completion:nil];
     
-    [controller release];    
 }
 
 - (void)settingsViewControllerDidFinish:(id)sender
 {
     NSLog(@"Reloading...");
     [pickerView reloadAllComponents];
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     if ([[SequenceManager sharedSequenceManager] count])
         knockButton.enabled = YES;
     else

@@ -21,7 +21,7 @@
     [self setPort:n];
     [self setProto:protocol];
     
-    return [self retain];
+    return self;
 }
 
 - (id) initWithPort:(Port*) portObj
@@ -35,13 +35,6 @@
     return self;
 }
 
-- (void) dealloc
-{
-    [port release];
-    [proto release];
-    
-    [super dealloc];
-}
 
 - (id) initWithCoder: (NSCoder *)coder
 {

@@ -14,9 +14,8 @@
 }
 
 + (SequenceManager *)sharedSequenceManager;
+- (id) initUniqueInstance;
 
-- (id) init;
-- (void) dealloc;
 - (void) save;
 - (void) load;
 - (NSUInteger) count;

@@ -19,22 +19,13 @@
 - (id) init 
 {
     self = [super init];
-    ports = [[[NSMutableArray alloc] init] retain];
-    delay = [[NSNumber numberWithInt:5] retain];
-    name = [[NSString stringWithString:@""] retain];
-    host = [[NSString stringWithString:@""] retain];
-    return [self retain];
+    ports = [[NSMutableArray alloc] init];
+    delay = [NSNumber numberWithInt:5];
+    name = @"";
+    host = @"";
+    return self;
 }
 
-- (void) dealloc
-{
-    [name release];
-    [host release];
-    [delay release];
-    [ports release];
-    
-    [super dealloc];
-}
 
 - (void) addPort:(unsigned short)port protocol:(NSString*)proto
 {
@@ -51,7 +42,7 @@
 
 - (Port*) portAtIndex: (NSUInteger)index
 {
-    return [[ports objectAtIndex:index] retain];
+    return [ports objectAtIndex:index];
 }
 
 - (NSUInteger) count

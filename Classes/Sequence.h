@@ -17,7 +17,6 @@
 }
 
 - (id) init;
-- (void) dealloc;
 
 - (void) addPort:(unsigned short)port protocol:(NSString*)proto;
 - (void) deletePortAtIndex: (NSUInteger)index;
@@ -25,9 +24,9 @@
 - (NSUInteger) count;
 - (void) dump;
 
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *host;
-@property (nonatomic, retain) NSNumber *delay;
-@property (nonatomic, retain) NSMutableArray *ports;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *host;
+@property (nonatomic, strong) NSNumber *delay;
+@property (nonatomic, strong) NSMutableArray *ports;
 
 @end

@@ -15,8 +15,7 @@
     UITextField *textField;
 }
 
-@property (nonatomic,retain) UITextField *textField;
-- (void) dealloc;
+@property (nonatomic,strong) UITextField *textField;
 
 @end
 
@@ -26,10 +25,8 @@
     UISegmentedControl *protoSegment;
 }
 
-@property (nonatomic,retain) UITextField *portField;
-@property (nonatomic,retain) UISegmentedControl *protoSegment;
-
-- (void) dealloc;
+@property (nonatomic,strong) UITextField *portField;
+@property (nonatomic,strong) UISegmentedControl *protoSegment;
 
 @end
 
@@ -41,13 +38,13 @@
     NSString *name;
     NSString *host;
     NSUInteger delay;
-    id <SequenceViewControllerDelegate> delegate;
+    id <SequenceViewControllerDelegate> __weak delegate;
 }
 
-@property (nonatomic, assign) id <SequenceViewControllerDelegate> delegate;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *host;
-@property (nonatomic, retain) NSMutableArray *ports;
+@property (nonatomic, weak) id <SequenceViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *host;
+@property (nonatomic, strong) NSMutableArray *ports;
 @property (nonatomic, assign) NSUInteger delay;
 
 - (IBAction) save: (id)sender;

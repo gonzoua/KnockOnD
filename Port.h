@@ -15,9 +15,8 @@
 
 - (id) initWithPortNumber: (NSUInteger)port proto:(NSString*)proto;
 - (id) initWithPort: (Port*)portObj;
-- (void) dealloc;
 
-@property (nonatomic, retain) NSNumber *port;
-@property (nonatomic, retain) NSString *proto;
+@property (nonatomic, strong) NSNumber *port;
+@property (nonatomic, strong) NSString *proto;
 
 @end

@@ -17,10 +17,10 @@
     Sequence *currentSeq;
     bool addingNew;
     IBOutlet UITableView *seqTableView;
-    id<SettingsViewControllerDelegate> delegate;
+    id<SettingsViewControllerDelegate> __weak delegate;
 }
 
-@property (nonatomic, assign) id<SettingsViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<SettingsViewControllerDelegate> delegate;
 
 - (IBAction) add: (id)sender;
 - (IBAction) done: (id)sender;
