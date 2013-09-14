@@ -305,6 +305,17 @@
     return YES;
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    if (proposedDestinationIndexPath.section == 0)
+        return sourceIndexPath;
+    
+    if (proposedDestinationIndexPath.row == [ports count])
+        return sourceIndexPath;
+    
+    return proposedDestinationIndexPath;
+}
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     id obj = [ports objectAtIndex:sourceIndexPath.row];
