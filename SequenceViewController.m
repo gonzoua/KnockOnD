@@ -451,6 +451,8 @@
 
 - (IBAction) save: (id)sender
 {
+    [self.view endEditing:YES];
+    
     if ([name isEqualToString:@""]) {
         [self alert:@"Empty sequence name"];
         return;
