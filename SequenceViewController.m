@@ -164,7 +164,6 @@
             textField.adjustsFontSizeToFitWidth = YES;
             textField.textColor = [UIColor blackColor];
             textField.font = [UIFont systemFontOfSize:17.0];
-            textField.backgroundColor = [UIColor whiteColor];
             textField.autocorrectionType = UITextAutocorrectionTypeNo;        // no auto correction support
             textField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
             textField.textAlignment = NSTextAlignmentLeft;
@@ -233,7 +232,6 @@
         textField.textColor = [UIColor blackColor];
         textField.font = [UIFont systemFontOfSize:17.0];
         textField.placeholder = @"Port number";
-        textField.backgroundColor = [UIColor whiteColor];
         textField.autocorrectionType = UITextAutocorrectionTypeNo;        // no auto correction support
         textField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
         textField.textAlignment = NSTextAlignmentLeft;
