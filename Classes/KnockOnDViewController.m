@@ -93,6 +93,10 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
     [progressView startAnimating];
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+        return YES;
+}
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -169,7 +173,6 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     NSInteger sequences = [[SequenceManager sharedSequenceManager] count];
-    NSLog(@"%ld sequences", sequences);
     if (sequences == 0)
         return 1;
     else

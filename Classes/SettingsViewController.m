@@ -204,4 +204,9 @@
     [self.delegate settingsViewControllerDidFinish:self];
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+        return YES;
+}
+
 @end
