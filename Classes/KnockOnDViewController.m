@@ -169,7 +169,7 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     NSInteger sequences = [[SequenceManager sharedSequenceManager] count];
-    NSLog(@"%d sequences", sequences);
+    NSLog(@"%ld sequences", sequences);
     if (sequences == 0)
         return 1;
     else
@@ -272,7 +272,7 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
                 unsigned short port = [p.port intValue];
                 BOOL isUDP = [p.proto isEqualToString:@"UDP"];
                 knockOnePort(he, port, isUDP);
-                NSLog(@"Sleeping for %dms", delay);
+                NSLog(@"Sleeping for %ldms", delay);
                 usleep(delay*1000);
             }
         }

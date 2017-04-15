@@ -76,7 +76,7 @@
     {
         currentSeq.name = controller.name;
         currentSeq.host = controller.host;
-        currentSeq.delay = [[NSNumber alloc] initWithInt:controller.delay];
+        currentSeq.delay = [[NSNumber alloc] initWithUnsignedLong:controller.delay];
      
         NSMutableArray *ports = [[NSMutableArray alloc] init];
         // copy ports back

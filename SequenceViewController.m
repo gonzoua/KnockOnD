@@ -196,7 +196,7 @@
         else if (indexPath.row == 2) {
             nameCell.textField.placeholder = @"Enter delay";
             cell.textLabel.text = @"Delay(ms)";
-            nameCell.textField.text = [NSString stringWithFormat:@"%d", delay];
+            nameCell.textField.text = [NSString stringWithFormat:@"%lu", delay];
         }
         
         return cell;

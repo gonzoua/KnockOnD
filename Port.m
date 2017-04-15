@@ -17,7 +17,7 @@
 - (id) initWithPortNumber: (NSUInteger)num proto:(NSString*)protocol
 {
     self = [super init];
-    NSNumber *n = [[NSNumber alloc] initWithInt:num];
+    NSNumber *n = [[NSNumber alloc] initWithUnsignedLong:num];
     [self setPort:n];
     [self setProto:protocol];
     
