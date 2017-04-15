@@ -26,6 +26,7 @@
 		9F43223D105CA2F9003BD1C3 /* Port.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F43223C105CA2F9003BD1C3 /* Port.m */; };
 		9F432449105DB20D003BD1C3 /* Sequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F432448105DB20D003BD1C3 /* Sequence.m */; };
 		9F4327E410608963003BD1C3 /* lock_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4327E310608963003BD1C3 /* lock_icon.png */; };
+		9F43FE241EA2D8E3002F4AEE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F43FE231EA2D8E2002F4AEE /* Images.xcassets */; };
 		9F480FC610609F0A0002B5E6 /* lock_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F480FC510609F0A0002B5E6 /* lock_button.png */; };
 		9F480FD010609FAE0002B5E6 /* key_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F480FCF10609FAE0002B5E6 /* key_icon.png */; };
 		9F57EB981068659100BEA00F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F57EB971068659100BEA00F /* Reachability.m */; };
@@ -66,6 +67,7 @@
 		9F432447105DB20D003BD1C3 /* Sequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sequence.h; sourceTree = "<group>"; };
 		9F432448105DB20D003BD1C3 /* Sequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sequence.m; sourceTree = "<group>"; };
 		9F4327E310608963003BD1C3 /* lock_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock_icon.png; sourceTree = "<group>"; };
+		9F43FE231EA2D8E2002F4AEE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = KnockOnD/Images.xcassets; sourceTree = "<group>"; };
 		9F480FC510609F0A0002B5E6 /* lock_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock_button.png; sourceTree = "<group>"; };
 		9F480FCF10609FAE0002B5E6 /* key_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = key_icon.png; sourceTree = "<group>"; };
 		9F57EB961068659100BEA00F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F43FE231EA2D8E2002F4AEE /* Images.xcassets */,
 				9F14A64817E43B2B0070BFA5 /* gear@2x.png */,
 				9F14A63317D986F60070BFA5 /* Default-568h@2x.png */,
 				9F14A63417D986F60070BFA5 /* Default.png */,
@@ -239,6 +242,7 @@
 				9F480FD010609FAE0002B5E6 /* key_icon.png in Resources */,
 				9F57ECE11069B22500BEA00F /* gear.png in Resources */,
 				9F7F5010106C765900D53CAF /* Entitlements.plist in Resources */,
+				9F43FE241EA2D8E3002F4AEE /* Images.xcassets in Resources */,
 				9F14A63617D986F60070BFA5 /* Default-568h@2x.png in Resources */,
 				9F14A63717D986F60070BFA5 /* Default.png in Resources */,
 				9F14A63817D986F60070BFA5 /* Default@2x.png in Resources */,
@@ -272,6 +276,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = M2VMBCXA6W;
@@ -292,6 +298,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
