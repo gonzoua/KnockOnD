@@ -110,7 +110,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {    
-    int x = [[SequenceManager sharedSequenceManager] count];
+    NSInteger x = [[SequenceManager sharedSequenceManager] count];
 
     return x;
 }
