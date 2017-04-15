@@ -26,7 +26,7 @@ BOOL knockOnePort (struct hostent* he, unsigned short port, BOOL udp)
     
     memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = *((long*)he->h_addr_list[0]);
+    addr.sin_addr.s_addr = *((in_addr_t*)he->h_addr_list[0]);
     addr.sin_port = htons(port);
     
     if (udp) {
