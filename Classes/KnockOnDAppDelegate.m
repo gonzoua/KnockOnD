@@ -14,15 +14,11 @@
 @synthesize window;
 @synthesize viewController;
 
-
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
-    NSLog(@"Did Finish");
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     // Override point for customization after app launch    
-    [window setRootViewController:viewController];
-    [window makeKeyAndVisible];
+    [self.window setRootViewController:viewController];
+    [self.window makeKeyAndVisible];
 }
-
-
-
 
 @end
