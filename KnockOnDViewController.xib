@@ -36,7 +36,7 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <pickerView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="11">
+                <pickerView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="11">
                     <rect key="frame" x="0.0" y="44" width="375" height="479"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -44,12 +44,15 @@
                         <outlet property="delegate" destination="-1" id="18"/>
                     </connections>
                 </pickerView>
-                <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13">
                     <rect key="frame" x="123" y="531" width="128" height="128"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" button="YES" image="YES"/>
                     </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="128" id="2qD-hh-kBo"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                     <state key="normal" image="key_icon.png">
                         <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -70,7 +73,6 @@
                 <constraint firstItem="11" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="4Dg-xb-ITk"/>
                 <constraint firstItem="13" firstAttribute="top" secondItem="11" secondAttribute="bottom" constant="8" id="6am-Af-n8k"/>
                 <constraint firstItem="8" firstAttribute="top" secondItem="6" secondAttribute="top" id="Aa6-Uy-PRG"/>
-                <constraint firstItem="13" firstAttribute="top" secondItem="11" secondAttribute="bottom" constant="8" id="CR7-x2-EiF"/>
                 <constraint firstItem="13" firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="EYB-Sq-fQ0"/>
                 <constraint firstItem="8" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="JGt-Os-x2a"/>
                 <constraint firstItem="8" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="SSt-qG-Xpp"/>
