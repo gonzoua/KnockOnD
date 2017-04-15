@@ -167,7 +167,7 @@
             textField.autocorrectionType = UITextAutocorrectionTypeNo;        // no auto correction support
             textField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
             textField.textAlignment = NSTextAlignmentLeft;
-            if (indexPath.row == 0)
+            if (indexPath.row < 2)
                 textField.keyboardType = UIKeyboardTypeASCIICapable; // use the default type input method (entire keyboard)
             else
                 textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation; // use the default type input method (entire keyboard)
@@ -395,7 +395,7 @@
 
 - (void) keyboardWillShow: (id)sender
 {
-    NSLog(@"Active tag %@/%d", activeTextField, activeTextField.tag); 
+    NSLog(@"Active tag %@/%ld", activeTextField, activeTextField.tag);
     if (activeTextField.tag < 1000) {
         seqTableView.frame = CGRectMake(seqTableView.frame.origin.x, 
                                         seqTableView.frame.origin.y, 
@@ -454,7 +454,7 @@
         [p setProto:@"TCP"];
     else
         [p setProto:@"UDP"];
-    NSLog(@"protoChanged: %d/%d", control.tag, control.selectedSegmentIndex);
+    NSLog(@"protoChanged: %ld/%ld", (long)control.tag, control.selectedSegmentIndex);
 }
 
 
