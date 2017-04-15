@@ -18,7 +18,7 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     NSLog(@"Did Finish");
     // Override point for customization after app launch    
-    [window addSubview:viewController.view];
+    [window setRootViewController:viewController];
     [window makeKeyAndVisible];
 }
 
